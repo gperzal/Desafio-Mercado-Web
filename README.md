@@ -28,9 +28,9 @@ La aplicación está diseñada con una interfaz de usuario amigable y notificaci
 
 ## Capturas de Diseño
 
-![Página Principal](https://github.com/gperzal/Desafio-Mercado-Web/tree/main/public/assets/img/screenshot/main.png)
+![Página Principal](https://github.com/gperzal/Desafio-Mercado-Web/blob/main/public/assets/img/screenshot/main.png)
 
-![Modal](https://github.com/gperzal/Desafio-Mercado-Web/tree/main/public/assets/img/screenshot/modal.png)
+![Modal](https://github.com/gperzal/Desafio-Mercado-Web/blob/main/public/assets/img/screenshot/modal.png)
 
 ## Instalación y Uso
 
