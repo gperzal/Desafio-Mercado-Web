@@ -1,0 +1,41 @@
+<h1 class="text-center mt-5">Bienvenidos al Mercado Web. Seleccione sus productos </h1>
+  
+  <section class="py-5">
+    <div class="container mt-5">
+      <div class="row">
+        {{#each productos}}
+          {{> producto nombre=this }}
+        {{/each}}
+      </div>
+    </div>
+  </section>
+
+  <section class="container py-5">
+ 
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#productosModal">
+  Ver Productos Seleccionados
+</button>
+
+  
+  </section>
+
+<section class="container py-5">
+<div class="modal fade" id="productosModal" tabindex="-1" role="dialog" aria-labelledby="productosModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="productosModalLabel">Productos Seleccionados</h5>
+        
+      </div>
+      <div class="modal-body">
+        <!-- El contenido de los productos seleccionados se añadirá aquí -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary">Confirmar Selección</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</section>
