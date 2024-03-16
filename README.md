@@ -42,7 +42,7 @@ Para ejecutar este proyecto localmente, sigue estos pasos:
    ```
 2. Navega hasta el directorio del proyecto:
    ```
-   cd Abracadabra
+   cd Desafio-Mercado-Web
    ```
 3. Instala las dependencias:
    ```
