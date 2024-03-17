@@ -1,12 +1,12 @@
 document.addEventListener('DOMContentLoaded', (event) => {
     const productosSeleccionados = [];
 
-    document.querySelectorAll('.producto').forEach(producto => {
+    document.querySelectorAll('.producto').forEach((producto, index) => {
         producto.addEventListener('click', () => {
             const nombreProducto = producto.getAttribute('data-nombre');
             const imagenProducto = producto.getAttribute('data-imagen');
-            // Agrega el producto y su imagen a tu array de seleccionados
-            productosSeleccionados.push({ nombre: nombreProducto, imagen: imagenProducto });
+            // Asigna un identificador único (index) al producto
+            productosSeleccionados.push({ id: index, nombre: nombreProducto, imagen: imagenProducto });
             // Llama a una función para actualizar la modal con los productos seleccionados
             actualizarModal(productosSeleccionados);
             var toastEl = document.getElementById('toastAgregado');
@@ -14,10 +14,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
             toast.show();
         });
     });
-
-
-
-
 
     function actualizarModal(productos) {
         const modalBody = document.querySelector('.modal-body');
@@ -31,9 +27,23 @@ document.addEventListener('DOMContentLoaded', (event) => {
         productosContainer.style.gap = '10px';
 
         // Agrega cada producto seleccionado al contenedor
-        productos.forEach(producto => {
+        productos.forEach((producto, index) => {
             const productoElement = document.createElement('div');
             productoElement.classList.add('producto-seleccionado');
+            productoElement.style.position = 'relative';
+
+            const eliminarBtn = document.createElement('div');
+            eliminarBtn.classList.add('animal_insertado_close');
+            eliminarBtn.title = 'Haz click aquí para eliminar el producto';
+            eliminarBtn.innerHTML = `<i class="fa-solid fa-circle-xmark"></i>`;
+            eliminarBtn.style.position = 'absolute';
+            eliminarBtn.style.top = '0';
+            eliminarBtn.style.right = '0';
+            eliminarBtn.style.cursor = 'pointer';
+            eliminarBtn.onclick = function () {
+                productosSeleccionados.splice(index, 1); // Elimina el producto del array
+                actualizarModal(productosSeleccionados); // Actualiza el modal
+            };
 
             const imagenElement = document.createElement('img');
             imagenElement.src = producto.imagen;
@@ -41,6 +51,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             imagenElement.style.width = '100px'; // Ajusta el tamaño de la imagen según necesites
 
             productoElement.appendChild(imagenElement);
+            productoElement.appendChild(eliminarBtn);
 
             const nombreElement = document.createElement('p');
             nombreElement.textContent = producto.nombre;
@@ -52,11 +63,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
         modalBody.appendChild(productosContainer); // Añade el contenedor de productos al cuerpo del modal
     }
 
-
-
     // Cierre Compra y Fin de Modal
     document.querySelector('.modal-footer .btn-primary').addEventListener('click', () => {
-        // Limpia el modal
         const modalBody = document.querySelector('.modal-body');
         modalBody.innerHTML = `
             <div class="alert alert-success text-center" role="alert">
@@ -64,16 +72,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
             </div>
         `;
 
-        // Limpia el array de productos seleccionados
-        productosSeleccionados.length = 0;
+        productosSeleccionados.length = 0; // Limpia el array de productos seleccionados
 
-        // Espera 3 segundos y cierra el modal
         setTimeout(() => {
-            $('#productosModal').modal('hide');
+            $('#productosModal').modal('hide'); // Cierra el modal después de 3 segundos
         }, 3000);
     });
-
-
-
-
 });
