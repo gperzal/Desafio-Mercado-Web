@@ -14,9 +14,9 @@
                 </div>
           </div>
         </div>
-  <section class="py-5">
-    <div class="container mt-5">
-      <div class="row">
+  <section class="py-2">
+    <div class="container mt-3">
+      <div class="row lista-productos">
         {{#each productos}}
           {{> producto nombre=this }}
         {{/each}}
@@ -26,11 +26,14 @@
 
   <section class="container py-5">
     <div class="d-flex justify-content-center">
-
+        <input type="text" class="form-control" id="buscarProducto" placeholder="Buscar productos..." style="width: 300px;">
+    </div>
+    
+    <div class="d-flex justify-content-center mt-3">
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#productosModal">
-        Ver Productos Seleccionados
-    </button>
-</div>
+            Ver Productos Seleccionados
+        </button>
+    </div>
   
   </section>
 

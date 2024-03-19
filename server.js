@@ -17,7 +17,6 @@ app.set('view engine', 'hbs');
 app.set('views', './views');
 
 
-
 // Rutas
 const mainRoutes = require('./routes/index');
 app.use('/', mainRoutes);

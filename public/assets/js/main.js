@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
             var toastEl = document.getElementById('toastAgregado');
             var toast = new bootstrap.Toast(toastEl);
             toast.show();
+            // Animación para indicar que el producto ha sido agregado con JQUERY
+            $(producto).fadeOut(200).fadeIn(200);
         });
     });
 
@@ -40,9 +42,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
             eliminarBtn.style.top = '0';
             eliminarBtn.style.right = '0';
             eliminarBtn.style.cursor = 'pointer';
+            // Animacion para eliminar con JQUERY
             eliminarBtn.onclick = function () {
-                productosSeleccionados.splice(index, 1); // Elimina el producto del array
-                actualizarModal(productosSeleccionados); // Actualiza el modal
+                // Encuentra el elemento del producto que se va a eliminar
+                var productoAEliminar = $(this).closest('.producto-seleccionado');
+
+                // Animación slideUp antes de eliminar el producto del array y actualizar el modal
+                productoAEliminar.slideUp(300, function () {
+                    productosSeleccionados.splice(index, 1); // Elimina el producto del array
+                    actualizarModal(productosSeleccionados); // Actualiza el modal
+                });
             };
 
             const imagenElement = document.createElement('img');
@@ -63,6 +72,17 @@ document.addEventListener('DOMContentLoaded', (event) => {
         modalBody.appendChild(productosContainer); // Añade el contenedor de productos al cuerpo del modal
     }
 
+
+    //CONSUMIR CODIGO DE JQUERY 
+    // Funcionalidad de filtrado dinámico de productos
+    $('#buscarProducto').on('keyup', function () {
+        var valor = $(this).val().toLowerCase();
+        $('.lista-productos .producto').filter(function () {
+            $(this).toggle($(this).find('.card-title').text().toLowerCase().indexOf(valor) > -1);
+        });
+    });
+
+
     // Cierre Compra y Fin de Modal
     document.querySelector('.modal-footer .btn-primary').addEventListener('click', () => {
         const modalBody = document.querySelector('.modal-body');
@@ -77,5 +97,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         setTimeout(() => {
             $('#productosModal').modal('hide'); // Cierra el modal después de 3 segundos
         }, 3000);
+
     });
 });
