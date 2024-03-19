@@ -1,6 +1,11 @@
 document.addEventListener('DOMContentLoaded', (event) => {
     const productosSeleccionados = [];
 
+    function actualizarContador() {
+        const contador = document.querySelector('.carrito-contador');
+        contador.textContent = productosSeleccionados.length;
+    }
+
     document.querySelectorAll('.producto').forEach((producto, index) => {
         producto.addEventListener('click', () => {
             const nombreProducto = producto.getAttribute('data-nombre');
@@ -9,11 +14,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
             productosSeleccionados.push({ id: index, nombre: nombreProducto, imagen: imagenProducto });
             // Llama a una función para actualizar la modal con los productos seleccionados
             actualizarModal(productosSeleccionados);
+
             var toastEl = document.getElementById('toastAgregado');
             var toast = new bootstrap.Toast(toastEl);
             toast.show();
             // Animación para indicar que el producto ha sido agregado con JQUERY
             $(producto).fadeOut(200).fadeIn(200);
+            actualizarContador();
         });
     });
 
@@ -45,13 +52,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
             // Animacion para eliminar con JQUERY
             eliminarBtn.onclick = function () {
                 // Encuentra el elemento del producto que se va a eliminar
+                actualizarContador();
                 var productoAEliminar = $(this).closest('.producto-seleccionado');
 
                 // Animación slideUp antes de eliminar el producto del array y actualizar el modal
                 productoAEliminar.slideUp(300, function () {
                     productosSeleccionados.splice(index, 1); // Elimina el producto del array
                     actualizarModal(productosSeleccionados); // Actualiza el modal
+                    actualizarContador(); // Actualiza el contador
                 });
+
             };
 
             const imagenElement = document.createElement('img');
