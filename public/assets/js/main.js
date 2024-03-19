@@ -6,6 +6,17 @@ document.addEventListener('DOMContentLoaded', (event) => {
         contador.textContent = productosSeleccionados.length;
     }
 
+    // Selecciona el ícono del carrito por su clase o id
+    const carritoIcono = document.querySelector('#carrito');
+
+    // Evento de clic para abrir el modal de productos seleccionados
+    carritoIcono.addEventListener('click', (e) => {
+        e.preventDefault(); // Prevenir la acción por defecto del enlace, si es que lo hay
+        const modalProductos = new bootstrap.Modal(document.getElementById('productosModal'));
+        modalProductos.show(); // Muestra el modal
+    });
+
+
     document.querySelectorAll('.producto').forEach((producto, index) => {
         producto.addEventListener('click', () => {
             const nombreProducto = producto.getAttribute('data-nombre');
@@ -103,7 +114,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         `;
 
         productosSeleccionados.length = 0; // Limpia el array de productos seleccionados
-
+        actualizarContador();
         setTimeout(() => {
             $('#productosModal').modal('hide'); // Cierra el modal después de 3 segundos
         }, 3000);
